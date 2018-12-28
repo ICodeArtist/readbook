@@ -1,0 +1,5 @@
+
+.loginbtn {
+  padding: 50% 2%;
+  width: 96%;
+}

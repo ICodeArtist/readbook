@@ -1,0 +1,1 @@
+<import src="/pages/editArt/editArt.vue.wxml" /><template is="676c183c" data="{{ ...$root['0'], $root }}"/>

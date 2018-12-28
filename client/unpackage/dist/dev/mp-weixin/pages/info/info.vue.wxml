@@ -1,0 +1,20 @@
+<template name="7fa4bfc2">
+  <view class="_view data-v-22d4c15a grace-padding">
+    <view class="_view data-v-22d4c15a {{['grace-article-title', graceSkeleton == 'ing' ? 'grace-skeleton' : '']}}">{{article.art_title}}</view>
+    <view class="_view data-v-22d4c15a grace-article-author-line">
+      <view class="_view data-v-22d4c15a {{['grace-article-author', graceSkeleton == 'ing' ? 'grace-skeleton' : '']}}">
+        <image src="{{article.u_face}}" mode="widthFix" class="_image data-v-22d4c15a"></image>
+        <view class="_view data-v-22d4c15a author-name">{{article.u_name}}</view>
+      </view>
+      <view class="_view data-v-22d4c15a">{{article.art_createtime}}</view>
+    </view>
+    <view class="_view data-v-22d4c15a grace-article-contents">
+      <block wx:key="index" key="{{index}}" wx:for="{{artContents}}" wx:for-index="index" wx:for-item="item">
+        <view wx:if="{{item.type == 'image'}}" class="_view data-v-22d4c15a {{['img-item', graceSkeleton == 'ing' ? 'grace-skeleton' : '']}}">
+          <image src="{{item.content}}" data-url="{{item.content}}" mode="widthFix" bindtap="handleProxy" data-eventid="{{'S2P-0-'+index}}" data-comkey="{{$k}}" class="_image data-v-22d4c15a"></image>
+        </view>
+        <view wx:if="{{item.type == 'text'}}" class="_view data-v-22d4c15a {{['text-item', graceSkeleton == 'ing' ? 'grace-skeleton' : '']}}">{{item.content}}</view>
+      </block>
+    </view>
+  </view>
+</template>
