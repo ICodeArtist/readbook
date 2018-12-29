@@ -23,15 +23,24 @@
             </view>
         </view>
 		<view class="grace-title grace-nowrap grace-space-between">
-            <view class="grace-h5 grace-blod">我的文章</view>
+            <view class="grace-h5 grace-blod">我发布的</view>
         </view>
-		<view class="myart-list" v-for="(item, index) in arts" :key="index">
+		<!-- <view class="myart-list" v-for="(item, index) in arts" :key="index">
             <view class="title">{{item.art_title}}</view>
             <view class="btns">
                 <view :data-artid="item.art_id"  @tap="editArt">编辑</view>
                 <view :data-artid="item.art_id" :data-index="index" @tap="removeArt">删除</view>
             </view>
-        </view>
+        </view> -->
+		<view class="grace-rows myart-list" v-for="(item, index) in arts" :key="index">
+			<view class="grace-items grace-center title" style="width:20%; margin-right:15px; flex-shrink:0;">
+				{{item.art_title}}
+			</view>
+			<view class="grace-items grace-center btns" style="width:100%;">
+				<view :data-artid="item.art_id"  @tap="editArt">编辑</view>
+				<view :data-artid="item.art_id" :data-index="index" @tap="removeArt">删除</view>
+			</view>
+		</view>
         <view class="loadMore" @tap="getArtList">{{loadMore}}</view>
 	</view>
 </template>

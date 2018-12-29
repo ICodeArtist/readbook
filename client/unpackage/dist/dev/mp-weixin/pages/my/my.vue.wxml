@@ -1,39 +1,39 @@
-<template name="46085cfc">
-  <view class="_view data-v-5626d8d3 grace-padding">
-    <view class="_view data-v-5626d8d3 myface">
-      <image src="{{myFace}}" mode="widthFix" class="_image data-v-5626d8d3"></image>
+<template name="80e12278">
+  <view class="_view data-v-d127fcca grace-padding">
+    <view class="_view data-v-d127fcca myface">
+      <image src="{{myFace}}" mode="widthFix" class="_image data-v-d127fcca"></image>
     </view>
-    <view style="text-align:center; margin:10px 0;" class="_view data-v-5626d8d3"> {{user.u_name}}
-      <text style="color: #888888;" bindtap="handleProxy" data-eventid="{{'DmS-0'}}" data-comkey="{{$k}}" class="_text data-v-5626d8d3">注销</text>
+    <view style="text-align:center; margin:10px 0;" class="_view data-v-d127fcca"> {{user.u_name}}
+      <text style="color: #888888;" bindtap="handleProxy" data-eventid="{{'kyk-0'}}" data-comkey="{{$k}}" class="_text data-v-d127fcca">注销</text>
     </view>
-    <view class="_view data-v-5626d8d3 grace-box-banner" style="margin:10rpx 0;">
-      <view class="_view data-v-5626d8d3 garce-items">
-        <view class="_view data-v-5626d8d3 line1">{{user.artCount}}</view>
-        <view class="_view data-v-5626d8d3 line2">文章</view>
+    <view class="_view data-v-d127fcca grace-box-banner" style="margin:10rpx 0;">
+      <view class="_view data-v-d127fcca garce-items">
+        <view class="_view data-v-d127fcca line1">{{user.artCount}}</view>
+        <view class="_view data-v-d127fcca line2">文章</view>
       </view>
-      <view class="_view data-v-5626d8d3 garce-items">
-        <view class="_view data-v-5626d8d3 line1">{{user.u_integral}}</view>
-        <view class="_view data-v-5626d8d3 line2">R币</view>
+      <view class="_view data-v-d127fcca garce-items">
+        <view class="_view data-v-d127fcca line1">{{user.u_integral}}</view>
+        <view class="_view data-v-d127fcca line2">R币</view>
       </view>
-      <view class="_view data-v-5626d8d3 garce-items">
-        <view class="_view data-v-5626d8d3 line1">{{user.u_remainder}}</view>
-        <view class="_view data-v-5626d8d3 line2">徽章</view>
+      <view class="_view data-v-d127fcca garce-items">
+        <view class="_view data-v-d127fcca line1">{{user.u_remainder}}</view>
+        <view class="_view data-v-d127fcca line2">徽章</view>
       </view>
-      <view class="_view data-v-5626d8d3 garce-items">
-        <view class="_view data-v-5626d8d3 line1">0</view>
-        <view class="_view data-v-5626d8d3 line2">消息</view>
-      </view>
-    </view>
-    <view class="_view data-v-5626d8d3 grace-title grace-nowrap grace-space-between">
-      <view class="_view data-v-5626d8d3 grace-h5 grace-blod">我的文章</view>
-    </view>
-    <view class="_view data-v-5626d8d3 myart-list" wx:key="index" key="{{index}}" wx:for="{{arts}}" wx:for-index="index" wx:for-item="item">
-      <view class="_view data-v-5626d8d3 title">{{item.art_title}}</view>
-      <view class="_view data-v-5626d8d3 btns">
-        <view data-artid="{{item.art_id}}" bindtap="handleProxy" data-eventid="{{'KBd-1-'+index}}" data-comkey="{{$k}}" class="_view data-v-5626d8d3">编辑</view>
-        <view data-artid="{{item.art_id}}" data-index="{{index}}" bindtap="handleProxy" data-eventid="{{'2ba-2-'+index}}" data-comkey="{{$k}}" class="_view data-v-5626d8d3">删除</view>
+      <view class="_view data-v-d127fcca garce-items">
+        <view class="_view data-v-d127fcca line1">0</view>
+        <view class="_view data-v-d127fcca line2">消息</view>
       </view>
     </view>
-    <view class="_view data-v-5626d8d3 loadMore" bindtap="handleProxy" data-eventid="{{'y3B-3'}}" data-comkey="{{$k}}">{{loadMore}}</view>
+    <view class="_view data-v-d127fcca grace-title grace-nowrap grace-space-between">
+      <view class="_view data-v-d127fcca grace-h5 grace-blod">我发布的</view>
+    </view>
+    <view class="_view data-v-d127fcca grace-rows myart-list" wx:key="index" key="{{index}}" wx:for="{{arts}}" wx:for-index="index" wx:for-item="item">
+      <view class="_view data-v-d127fcca grace-items grace-center title" style="width:20%; margin-right:15px; flex-shrink:0;"> {{item.art_title}} </view>
+      <view class="_view data-v-d127fcca grace-items grace-center btns" style="width:100%;">
+        <view data-artid="{{item.art_id}}" bindtap="handleProxy" data-eventid="{{'lJS-1-'+index}}" data-comkey="{{$k}}" class="_view data-v-d127fcca">编辑</view>
+        <view data-artid="{{item.art_id}}" data-index="{{index}}" bindtap="handleProxy" data-eventid="{{'pOf-2-'+index}}" data-comkey="{{$k}}" class="_view data-v-d127fcca">删除</view>
+      </view>
+    </view>
+    <view class="_view data-v-d127fcca loadMore" bindtap="handleProxy" data-eventid="{{'i7X-3'}}" data-comkey="{{$k}}">{{loadMore}}</view>
   </view>
 </template>

@@ -6,7 +6,7 @@ class category{
 		$_GET['pid'] = empty($_GET['pid']) ? 0 : intval($_GET['pid']);
 		$db = \hsTool\db::getInstance('categories');
 		if(empty($_GET['pid'])){
-			$categories = $db->order('cate_order asc')->fetchAll();
+			$categories = $db->where('cate_id !=? ' ,array('4'))->order('cate_order asc')->fetchAll();
 		}else{
 			$categories = $db->order('cate_order asc')->where('cate_pid = ?', array($_GET['pid']))->fetchAll();
 		}

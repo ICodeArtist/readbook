@@ -30,7 +30,7 @@
     ],
     "globalStyle" : {
         "navigationBarTextStyle" : "black",
-        "navigationBarTitleText" : "读书的人生",
+        "navigationBarTitleText" : "小窗有视界",
         "navigationBarBackgroundColor" : "#F8F8F8",
         "backgroundColor" : "#F8F8F8"
     },
@@ -40,7 +40,7 @@
         "list" : [
             {
                 "pagePath" : "pages/index/index",
-                "text" : "阅读",
+                "text" : "视界",
                 "iconPath" : "static/nav1.png",
                 "selectedIconPath" : "static/nav1-a.png"
             },
