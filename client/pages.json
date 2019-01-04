@@ -40,19 +40,19 @@
         "list" : [
             {
                 "pagePath" : "pages/index/index",
-                "text" : "视界",
+                "text" : "",
                 "iconPath" : "static/nav1.png",
                 "selectedIconPath" : "static/nav1-a.png"
             },
             {
                 "pagePath" : "pages/write/write",
-                "text" : "记录",
+                "text" : "",
                 "iconPath" : "static/nav2.png",
                 "selectedIconPath" : "static/nav2-a.png"
             },
             {
                 "pagePath" : "pages/my/my",
-                "text" : "我的",
+                "text" : "",
                 "iconPath" : "static/nav3.png",
                 "selectedIconPath" : "static/nav3-a.png"
             }

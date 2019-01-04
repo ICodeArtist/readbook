@@ -1,5 +1,5 @@
 <template>
-	<view class="grace-padding">
+	<view class="grace-padding" v-if="version == '1'">
 		<view class="grace-header-cate">
             <scroll-view class="grace-tab-title grace-center" scroll-x="true" id="grace-tab-title">
                 <view v-for="(cate, index) in categories" :key="index" :data-cateid="cate.cateId" :data-index="index" :class="[cateCurrentIndex == index ? 'grace-tab-current' : '']" @tap="tabChange">{{cate.name}}</view>
@@ -42,6 +42,9 @@
             </block>
         </view>   
 	</view>
+	<view class="grace-padding" v-else>
+		<view class="waittext">维护中。。。</view>
+	</view>
 </template>
 
 <script>
@@ -50,6 +53,7 @@ var sign = require('../../commons/sign.js');
 export default {
 	data() {
 		return {
+			version:'0',
 			categories:[{cateId : 0, name : "全部"}],
             cateCurrentIndex : 0,
 			artList : []
@@ -74,6 +78,9 @@ export default {
         });
 		//
 		this.getNewsList();
+	},
+	onShow() {
+		this.version = uni.getStorageSync('V');
 	},
 	onPullDownRefresh : function(){
 		page = 1;

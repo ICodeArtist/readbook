@@ -417,3 +417,5 @@ margin:0; color:#000;}
 .submitNow{line-height:50px; color:#00B26A; font-size:18px; margin:0px 10px; text-align:center; border-top:1px solid #F1F2F3; border-bottom:1px solid #F1F2F3;}
 .deleteText{text-align:center; line-height:20px; font-size:14px; color: #00B26A; margin-top:8px;}
 .art-cate{padding:10px; display:flex; flex-wrap:nowrap; justify-content:space-between;}
+
+.waittext{padding:50% 2%; width:96%;text-align: center;font-size: 68rpx;}

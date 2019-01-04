@@ -1,5 +1,5 @@
 <template>
-	<view class="grace-padding">
+	<view class="grace-padding" v-if="version == '1'">
 		<view class="myface"><image :src="myFace" mode="widthFix"></image></view>
 		<view style="text-align:center; margin:10px 0;">
 			{{user.u_name}} <text style="color: #888888;" @tap="logoff">注销</text>
@@ -43,6 +43,9 @@
 		</view>
         <view class="loadMore" @tap="getArtList">{{loadMore}}</view>
 	</view>
+	<view class="grace-padding" v-else>
+		<view class="waittext">维护中。。。</view>
+	</view>
 </template>
 
 <script>
@@ -50,6 +53,7 @@ var _self, loginRes,page;
 export default {
 	data() {
 		return {
+			version:'0',
 			myFace:'',
 			user:{},
 			arts : [],
@@ -63,6 +67,7 @@ export default {
 		this.myFace = loginRes[3];
 	},
 	onShow : function() {
+		this.version = uni.getStorageSync('V');
 		loginRes = this.checkLogin('../my/my', 2);
 		if(!loginRes){return ;}
 		// 加载会员信息
