@@ -43,16 +43,23 @@
         </view>   
 	</view>
 	<view class="grace-padding" v-else>
-		<view class="waittext">维护中。。。</view>
+		<view class="waittext">
+			<led :mode="1"></led>
+		</view>
 	</view>
 </template>
 
 <script>
+import led from '../../components/mehaotian-numled/mehaotian-numled.vue';
 var _self, cate = 0, page = 1;
 var sign = require('../../commons/sign.js');
 export default {
+	components: {
+		led
+	},
 	data() {
 		return {
+			arr: [1, 2, 3, 4, 5, 6, 7, 8, 9, 0],
 			version:'0',
 			categories:[{cateId : 0, name : "全部"}],
             cateCurrentIndex : 0,
@@ -60,6 +67,9 @@ export default {
 		}
 	},
 	onLoad() {
+		setTimeout(() => {
+			this.arr = [0, 9, 8, 7, 6, 5, 4, 3, 2, 1];
+		}, 2000);
 		_self = this;
 		page = 1;
 		sign.sign(this.apiServer);

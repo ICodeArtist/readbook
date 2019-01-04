@@ -44,15 +44,22 @@
         <view class="loadMore" @tap="getArtList">{{loadMore}}</view>
 	</view>
 	<view class="grace-padding" v-else>
-		<view class="waittext">维护中。。。</view>
+		<view class="waittext">
+			<led :mode="2"></led>
+		</view>
 	</view>
 </template>
 
 <script>
+import led from '../../components/mehaotian-numled/mehaotian-numled.vue';
 var _self, loginRes,page;
 export default {
+	components: {
+		led
+	},
 	data() {
 		return {
+			arr: [1, 2, 3, 4, 5, 6, 7, 8, 9, 0],
 			version:'0',
 			myFace:'',
 			user:{},
@@ -61,6 +68,9 @@ export default {
 		};
 	},
 	onLoad:function(){
+		setTimeout(() => {
+			this.arr = [0, 9, 8, 7, 6, 5, 4, 3, 2, 1];
+		}, 2000);
 		_self = this;
 		var loginRes = this.checkLogin('../my/my',2);
 		if(!loginRes){return ;}

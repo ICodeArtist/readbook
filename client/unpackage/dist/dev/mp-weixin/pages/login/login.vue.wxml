@@ -1,5 +1,5 @@
 <template name="62e9111e">
   <view class="_view data-v-c5e9ae22 loginbtn">
-    <button type="primary" open-type="getUserInfo" bindgetuserinfo="handleProxy" data-eventid="{{'DUP-0'}}" data-comkey="{{$k}}" class="_button data-v-c5e9ae22">使用微信登录</button>
+    <button type="primary" open-type="getUserInfo" bindgetuserinfo="handleProxy" data-eventid="{{'XoN-0'}}" data-comkey="{{$k}}" class="_button data-v-c5e9ae22">使用微信登录</button>
   </view>
 </template>

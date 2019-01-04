@@ -1,10 +1,11 @@
+<import src="/components/mehaotian-numled/mehaotian-numled.vue.wxml" />
 <template name="80e12278">
-  <view class="_view data-v-d127fcca grace-padding">
+  <view class="_view data-v-d127fcca grace-padding" wx:if="{{version == '1'}}">
     <view class="_view data-v-d127fcca myface">
       <image src="{{myFace}}" mode="widthFix" class="_image data-v-d127fcca"></image>
     </view>
     <view style="text-align:center; margin:10px 0;" class="_view data-v-d127fcca"> {{user.u_name}}
-      <text style="color: #888888;" bindtap="handleProxy" data-eventid="{{'kyk-0'}}" data-comkey="{{$k}}" class="_text data-v-d127fcca">注销</text>
+      <text style="color: #888888;" bindtap="handleProxy" data-eventid="{{'On9-0'}}" data-comkey="{{$k}}" class="_text data-v-d127fcca">注销</text>
     </view>
     <view class="_view data-v-d127fcca grace-box-banner" style="margin:10rpx 0;">
       <view class="_view data-v-d127fcca garce-items">
@@ -30,10 +31,15 @@
     <view class="_view data-v-d127fcca grace-rows myart-list" wx:key="index" key="{{index}}" wx:for="{{arts}}" wx:for-index="index" wx:for-item="item">
       <view class="_view data-v-d127fcca grace-items grace-center title" style="width:20%; margin-right:15px; flex-shrink:0;"> {{item.art_title}} </view>
       <view class="_view data-v-d127fcca grace-items grace-center btns" style="width:100%;">
-        <view data-artid="{{item.art_id}}" bindtap="handleProxy" data-eventid="{{'lJS-1-'+index}}" data-comkey="{{$k}}" class="_view data-v-d127fcca">编辑</view>
-        <view data-artid="{{item.art_id}}" data-index="{{index}}" bindtap="handleProxy" data-eventid="{{'pOf-2-'+index}}" data-comkey="{{$k}}" class="_view data-v-d127fcca">删除</view>
+        <view data-artid="{{item.art_id}}" bindtap="handleProxy" data-eventid="{{'vk3-1-'+index}}" data-comkey="{{$k}}" class="_view data-v-d127fcca">编辑</view>
+        <view data-artid="{{item.art_id}}" data-index="{{index}}" bindtap="handleProxy" data-eventid="{{'1w6-2-'+index}}" data-comkey="{{$k}}" class="_view data-v-d127fcca">删除</view>
       </view>
     </view>
-    <view class="_view data-v-d127fcca loadMore" bindtap="handleProxy" data-eventid="{{'i7X-3'}}" data-comkey="{{$k}}">{{loadMore}}</view>
+    <view class="_view data-v-d127fcca loadMore" bindtap="handleProxy" data-eventid="{{'HPK-3'}}" data-comkey="{{$k}}">{{loadMore}}</view>
+  </view>
+  <view class="_view data-v-d127fcca grace-padding" wx:else>
+    <view class="_view data-v-d127fcca waittext">
+      <template data="{{...$root['0'], ...$root[$kk+'pQ4-0'],$root}}" is="085754f4"></template>
+    </view>
   </view>
 </template>

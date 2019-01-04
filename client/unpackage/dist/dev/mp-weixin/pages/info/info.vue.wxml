@@ -11,7 +11,7 @@
     <view class="_view data-v-4409241b grace-article-contents">
       <block wx:key="index" key="{{index}}" wx:for="{{artContents}}" wx:for-index="index" wx:for-item="item">
         <view wx:if="{{item.type == 'image'}}" class="_view data-v-4409241b {{['img-item', graceSkeleton == 'ing' ? 'grace-skeleton' : '']}}">
-          <image src="{{item.content}}" data-url="{{item.content}}" mode="widthFix" bindtap="handleProxy" data-eventid="{{'Kr2-0-'+index}}" data-comkey="{{$k}}" class="_image data-v-4409241b"></image>
+          <image src="{{item.content}}" data-url="{{item.content}}" mode="widthFix" bindtap="handleProxy" data-eventid="{{'emv-0-'+index}}" data-comkey="{{$k}}" class="_image data-v-4409241b"></image>
         </view>
         <view wx:if="{{item.type == 'text'}}" class="_view data-v-4409241b {{['text-item', graceSkeleton == 'ing' ? 'grace-skeleton' : '']}}">{{item.content}}</view>
       </block>

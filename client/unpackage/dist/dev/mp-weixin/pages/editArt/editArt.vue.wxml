@@ -1,24 +1,24 @@
 <template name="12d58afe">
   <view class="_view data-v-1557b18f wrap">
     <view class="_view data-v-1557b18f write_title">
-      <input type="text" value="{{title}}" bindinput="handleProxy" placeholder="请输入标题" data-eventid="{{'ZDK-0'}}" data-comkey="{{$k}}" class="_input data-v-1557b18f" />
+      <input type="text" value="{{title}}" bindinput="handleProxy" placeholder="请输入标题" data-eventid="{{'GAS-0'}}" data-comkey="{{$k}}" class="_input data-v-1557b18f" />
     </view>
     <view class="_view data-v-1557b18f artList">
       <block wx:key="index" key="{{index}}" wx:for="{{artList}}" wx:for-index="index" wx:for-item="item">
         <view class="_view data-v-1557b18f item" wx:if="{{item.type == 'image'}}">
-          <image src="{{item.content}}" data-index="{{index}}" mode="widthFix" bindtap="handleProxy" data-eventid="{{'6MM-1-'+index}}" data-comkey="{{$k}}" class="_image data-v-1557b18f"></image>
+          <image src="{{item.content}}" data-index="{{index}}" mode="widthFix" bindtap="handleProxy" data-eventid="{{'nA6-1-'+index}}" data-comkey="{{$k}}" class="_image data-v-1557b18f"></image>
         </view>
         <view class="_view data-v-1557b18f item" wx:if="{{item.type == 'text'}}">
-          <textarea value="{{artList[index].content}}" placeholder bindinput="handleProxy" data-eventid="{{'0wK-2-'+index}}" data-comkey="{{$k}}" class="_textarea data-v-1557b18f" />
-          <view data-index="{{index}}" class="_view data-v-1557b18f deleteText" bindtap="handleProxy" data-eventid="{{'a2E-3-'+index}}" data-comkey="{{$k}}">删除</view>
+          <textarea value="{{artList[index].content}}" placeholder bindinput="handleProxy" data-eventid="{{'jq9-2-'+index}}" data-comkey="{{$k}}" class="_textarea data-v-1557b18f" />
+          <view data-index="{{index}}" class="_view data-v-1557b18f deleteText" bindtap="handleProxy" data-eventid="{{'c00-3-'+index}}" data-comkey="{{$k}}">删除</view>
         </view>
       </block>
     </view>
-    <form bindsubmit="handleProxy" data-eventid="{{'PrK-6'}}" data-comkey="{{$k}}" class="_form data-v-1557b18f">
+    <form bindsubmit="handleProxy" data-eventid="{{'36B-6'}}" data-comkey="{{$k}}" class="_form data-v-1557b18f">
       <view class="_view data-v-1557b18f inputArea">
-        <view class="_view data-v-1557b18f addImg" bindtap="handleProxy" data-eventid="{{'BNU-4'}}" data-comkey="{{$k}}">+图片</view>
+        <view class="_view data-v-1557b18f addImg" bindtap="handleProxy" data-eventid="{{'LSZ-4'}}" data-comkey="{{$k}}">+图片</view>
         <view class="_view data-v-1557b18f addText">
-          <textarea name="artText" maxlength="-1" value="{{inputContent}}" bindinput="handleProxy" placeholder="请输入文本" data-eventid="{{'UQg-5'}}" data-comkey="{{$k}}" class="_textarea data-v-1557b18f" />
+          <textarea name="artText" maxlength="-1" value="{{inputContent}}" bindinput="handleProxy" placeholder="请输入文本" data-eventid="{{'LBZ-5'}}" data-comkey="{{$k}}" class="_textarea data-v-1557b18f" />
           <button type="primary" form-type="submit" class="_button data-v-1557b18f">添加</button>
         </view>
       </view>
@@ -26,11 +26,11 @@
     <view class="_view data-v-1557b18f art-cate">
       <view class="_view data-v-1557b18f">文章分类</view>
       <view class="_view data-v-1557b18f">
-        <picker mode="selector" range="{{caties}}" bindchange="handleProxy" data-eventid="{{'fe9-7'}}" data-comkey="{{$k}}" class="_picker data-v-1557b18f">
+        <picker mode="selector" range="{{caties}}" bindchange="handleProxy" data-eventid="{{'NBm-7'}}" data-comkey="{{$k}}" class="_picker data-v-1557b18f">
           <view class="_view data-v-1557b18f">{{caties[currentCateIndex]}}</view>
         </picker>
       </view>
     </view>
-    <view class="_view data-v-1557b18f submitNow" wx:if="{{artList.length > 0}}" bindtap="handleProxy" data-eventid="{{'znm-8'}}" data-comkey="{{$k}}">编辑</view>
+    <view class="_view data-v-1557b18f submitNow" wx:if="{{artList.length > 0}}" bindtap="handleProxy" data-eventid="{{'A8k-8'}}" data-comkey="{{$k}}">编辑</view>
   </view>
 </template>

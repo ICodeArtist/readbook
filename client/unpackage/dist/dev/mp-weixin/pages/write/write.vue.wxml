@@ -1,23 +1,24 @@
+<import src="/components/mehaotian-numled/mehaotian-numled.vue.wxml" />
 <template name="2595c8ec">
-  <view class="_view data-v-2757335b wrap">
+  <view class="_view data-v-2757335b wrap" wx:if="{{version == '1'}}">
     <view class="_view data-v-2757335b write_title">
-      <input type="text" value="{{title}}" bindinput="handleProxy" placeholder="请输入标题" data-eventid="{{'h9m-0'}}" data-comkey="{{$k}}" class="_input data-v-2757335b" />
+      <input type="text" value="{{title}}" bindinput="handleProxy" placeholder="请输入标题" data-eventid="{{'AwI-0'}}" data-comkey="{{$k}}" class="_input data-v-2757335b" />
     </view>
     <view class="_view data-v-2757335b artList">
       <block wx:key="index" key="{{index}}" wx:for="{{artList}}" wx:for-index="index" wx:for-item="item">
         <view class="_view data-v-2757335b item" wx:if="{{item.type == 'image'}}">
-          <image src="{{item.content}}" data-index="{{index}}" mode="widthFix" bindtap="handleProxy" data-eventid="{{'DdD-1-'+index}}" data-comkey="{{$k}}" class="_image data-v-2757335b"></image>
+          <image src="{{item.content}}" data-index="{{index}}" mode="widthFix" bindtap="handleProxy" data-eventid="{{'bbw-1-'+index}}" data-comkey="{{$k}}" class="_image data-v-2757335b"></image>
         </view>
         <view class="_view data-v-2757335b item" wx:if="{{item.type == 'text'}}">
-          <textarea value="{{artList[index].content}}" placeholder bindinput="handleProxy" data-eventid="{{'JsR-2-'+index}}" data-comkey="{{$k}}" class="_textarea data-v-2757335b" />
-          <view data-index="{{index}}" class="_view data-v-2757335b deleteText" bindtap="handleProxy" data-eventid="{{'USz-3-'+index}}" data-comkey="{{$k}}">删除</view>
+          <textarea value="{{artList[index].content}}" placeholder bindinput="handleProxy" data-eventid="{{'TuF-2-'+index}}" data-comkey="{{$k}}" class="_textarea data-v-2757335b" />
+          <view data-index="{{index}}" class="_view data-v-2757335b deleteText" bindtap="handleProxy" data-eventid="{{'uW0-3-'+index}}" data-comkey="{{$k}}">删除</view>
         </view>. </block>
     </view>
-    <form bindsubmit="handleProxy" data-eventid="{{'kTt-6'}}" data-comkey="{{$k}}" class="_form data-v-2757335b">
+    <form bindsubmit="handleProxy" data-eventid="{{'J7L-6'}}" data-comkey="{{$k}}" class="_form data-v-2757335b">
       <view class="_view data-v-2757335b inputArea">
-        <view class="_view data-v-2757335b addImg" bindtap="handleProxy" data-eventid="{{'KIq-4'}}" data-comkey="{{$k}}">+图片</view>
+        <view class="_view data-v-2757335b addImg" bindtap="handleProxy" data-eventid="{{'2Of-4'}}" data-comkey="{{$k}}">+图片</view>
         <view class="_view data-v-2757335b addText">
-          <textarea name="artText" maxlength="-1" value="{{inputContent}}" bindinput="handleProxy" placeholder="请输入文本" data-eventid="{{'44y-5'}}" data-comkey="{{$k}}" class="_textarea data-v-2757335b" />
+          <textarea name="artText" maxlength="-1" value="{{inputContent}}" bindinput="handleProxy" placeholder="请输入文本" data-eventid="{{'OLu-5'}}" data-comkey="{{$k}}" class="_textarea data-v-2757335b" />
           <button type="primary" form-type="submit" class="_button data-v-2757335b">添加</button>
         </view>
       </view>
@@ -25,11 +26,16 @@
     <view class="_view data-v-2757335b art-cate">
       <view class="_view data-v-2757335b">文章分类</view>
       <view class="_view data-v-2757335b">
-        <picker mode="selector" range="{{caties}}" bindchange="handleProxy" data-eventid="{{'O37-7'}}" data-comkey="{{$k}}" class="_picker data-v-2757335b">
+        <picker mode="selector" range="{{caties}}" bindchange="handleProxy" data-eventid="{{'l3X-7'}}" data-comkey="{{$k}}" class="_picker data-v-2757335b">
           <view class="_view data-v-2757335b">{{caties[currentCateIndex]}}</view>
         </picker>
       </view>
     </view>
-    <view class="_view data-v-2757335b submitNow" wx:if="{{artList.length > 0}}" bindtap="handleProxy" data-eventid="{{'Av1-8'}}" data-comkey="{{$k}}">发布</view>
+    <view class="_view data-v-2757335b submitNow" wx:if="{{artList.length > 0}}" bindtap="handleProxy" data-eventid="{{'W70-8'}}" data-comkey="{{$k}}">发布</view>
+  </view>
+  <view class="_view data-v-2757335b grace-padding" wx:else>
+    <view class="_view data-v-2757335b waittext">
+      <template data="{{...$root['0'], ...$root[$kk+'x61-0'],$root}}" is="085754f4"></template>
+    </view>
   </view>
 </template>

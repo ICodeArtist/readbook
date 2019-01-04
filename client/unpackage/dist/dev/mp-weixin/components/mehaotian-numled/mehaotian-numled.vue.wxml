@@ -1,0 +1,18 @@
+<template name="085754f4">
+  <view class="_view data-v-4d5ad90f wrap">
+    <view class="_view data-v-4d5ad90f box {{[  item === ':' ? 'circle' : '',  item === ':' && !close ? 'clear' : '',  item === ':' && twinkle ? 'active' : '']}}" wx:key="index" key="{{index}}" wx:for="{{list}}" wx:for-index="index" wx:for-item="item">
+      <block wx:if="{{item === ':'}}">
+        <view wx:if="{{close}}" class="_view data-v-4d5ad90f circle-box "></view>
+        <view wx:if="{{close}}" class="_view data-v-4d5ad90f circle-box "></view>
+      </block>
+      <block wx:else>
+        <view wx:key="idx" key="{{idx}}" wx:for="{{2}}" wx:for-index="idx" wx:for-item="num" class="_view data-v-4d5ad90f {{[idx === 0 ? 'box-top' : '', idx === 1 ? 'box-bottom' : '']}}">
+          <view wx:if="{{idx === 0}}" class="_view data-v-4d5ad90f box-top-top {{[timeList[item][0] ? 'active' : '']}}"></view>
+          <view class="_view data-v-4d5ad90f box-top-right {{[timeList[item][idx === 0 ? 1 : 4] ? 'active' : '']}}"></view>
+          <view class="_view data-v-4d5ad90f box-top-bottom {{[timeList[item][idx === 0 ? 2 : 5] ? 'active' : '']}}"></view>
+          <view class="_view data-v-4d5ad90f box-top-left  {{[timeList[item][idx === 0 ? 3 : 6] ? 'active' : '']}}"></view>
+        </view>
+      </block>
+    </view>
+  </view>
+</template>
