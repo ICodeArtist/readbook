@@ -90,7 +90,17 @@ export default {
 		this.getNewsList();
 	},
 	onShow() {
-		this.version = uni.getStorageSync('V');
+		uni.request({
+		    url: this.apiServer + 'index&m=index',
+		    method: 'GET',
+		    data: {},
+		    success: res => {
+				this.version = res.data.data.version;
+				if(res.data.data.version == '0'){
+					uni.hideTabBar();
+				}
+			},
+		});
 	},
 	onPullDownRefresh : function(){
 		page = 1;
