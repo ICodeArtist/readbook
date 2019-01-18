@@ -1,5 +1,5 @@
 <template>
-	<view class="wrap">
+	<view class="wrap" v-if="version == '1'">
 		<view  class="write_title">
 			<input type="text" v-model="title"  placeholder="请输入标题"/>
 		</view>
@@ -37,12 +37,21 @@
 		<!-- 提交按钮 -->
 		<view class="submitNow" v-if="artList.length > 0" @tap="submitNow">发布</view>
 	</view>
+	<view class="grace-padding" v-else>
+		<view class="waittext">
+			<led :mode="3"></led>
+		</view>
+	</view>
 </template>
 
 <script>
+import led from '../../components/mehaotian-numled/mehaotian-numled.vue';
 var _self, loginRes;
 var signModel = require('../../commons/sign.js');
 export default {
+	components: {
+		led
+	},
 	data() {
 		return {
 			arr: [1, 2, 3, 4, 5, 6, 7, 8, 9, 0],
@@ -61,6 +70,9 @@ export default {
 		}
 	},
 	onLoad : function() {
+		setTimeout(() => {
+			this.arr = [0, 9, 8, 7, 6, 5, 4, 3, 2, 1];
+		}, 2000);
 		_self = this;		
 		loginRes = this.checkLogin('../write/write', '2');
 		if(!loginRes){return false;}
@@ -84,7 +96,37 @@ export default {
 		});
 	},
 	onShow:function(){
-		this.version = uni.getStorageSync('V');
+		uni.request({
+		    url: this.apiServer + 'index&m=index',
+		    method: 'GET',
+		    data: {},
+		    success: res => {
+				this.version = res.data.data.version;
+				if(res.data.data.version == '0'){
+					// uni.hideTabBar();
+					
+				}else{
+					uni.setTabBarItem({
+						index: 0,
+						text: '首页',
+						"iconPath" : "static/nav1.png",
+						"selectedIconPath" : "static/nav1-a.png"
+					})
+					uni.setTabBarItem({
+						index: 1,
+						text: '记录',
+						"iconPath" : "static/nav2.png",
+						"selectedIconPath" : "static/nav2-a.png"
+					})
+					uni.setTabBarItem({
+						index: 2,
+						text: '我的',
+						"iconPath" : "static/nav3.png",
+						"selectedIconPath" : "static/nav3-a.png"
+					})
+				}
+			},
+		});
 		// console.log();
 		loginRes = this.checkLogin('../write/write', '2');
 		if(!loginRes){return false;}

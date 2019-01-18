@@ -97,7 +97,27 @@ export default {
 		    success: res => {
 				this.version = res.data.data.version;
 				if(res.data.data.version == '0'){
-					uni.hideTabBar();
+					// uni.hideTabBar();
+					
+				}else{
+					uni.setTabBarItem({
+						index: 0,
+						text: '首页',
+						"iconPath" : "static/nav1.png",
+						"selectedIconPath" : "static/nav1-a.png"
+					})
+					uni.setTabBarItem({
+						index: 1,
+						text: '记录',
+						"iconPath" : "static/nav2.png",
+						"selectedIconPath" : "static/nav2-a.png"
+					})
+					uni.setTabBarItem({
+						index: 2,
+						text: '我的',
+						"iconPath" : "static/nav3.png",
+						"selectedIconPath" : "static/nav3-a.png"
+					})
 				}
 			},
 		});
