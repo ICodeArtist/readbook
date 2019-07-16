@@ -29,7 +29,8 @@ export default {
 		return {
 			article : [], //文章基础信息
             artContents : [], // 文章项目
-            graceSkeleton : 'ing'
+            graceSkeleton : 'ing',
+			artid:""
 		};
 	},
 	methods: {
@@ -50,6 +51,7 @@ export default {
 	onLoad:function(option){
 		_self = this;
 		artid = option.artid;
+		_self.artid = artid
 		// 加载文章详情
         uni.showLoading({title:""});
         uni.request({
@@ -74,7 +76,10 @@ export default {
 				},500);
 			}
 		});
-	} 
+	} ,
+	onShareAppMessage(res) {
+		
+	}
 }
 </script>
 <style>

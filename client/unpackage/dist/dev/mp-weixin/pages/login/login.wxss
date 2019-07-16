@@ -1,6 +1,5 @@
-@import "../../common/vendor.wxss";
 
-.loginbtn {
-  padding: 50% 2%;
-  width: 96%;
+.loginbtn{
+	padding:50% 2%; width:96%;
 }
+

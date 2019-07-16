@@ -1,4 +1,544 @@
-require("../../common/manifest.js");
-require("../../common/vendor.js");
-global.webpackJsonp([6],{36:function(t,e,a){"use strict";var i=s(a(2)),n=s(a(37));function s(t){return t&&t.__esModule?t:{default:t}}Page((0,i.default)(n.default))},37:function(t,e,a){"use strict";Object.defineProperty(e,"__esModule",{value:!0});var i=a(39),n=a.n(i),s=a(40),o=!1;var r=function(t){o||a(38)},c=a(1)(n.a,s.a,r,null,null);c.options.__file="..\\..\\..\\..\\A\\my\\readbook\\client\\pages\\editArt\\editArt.vue",c.esModule&&Object.keys(c.esModule).some(function(t){return"default"!==t&&"__"!==t.substr(0,2)})&&console.error("named exports are not supported in *.vue files."),c.options.functional&&console.error("[vue-loader] editArt.vue: functional components are not supported with templates, they should use render functions."),e.default=c.exports},38:function(t,e){},39:function(t,e,a){"use strict";(function(t){var i,n,s;Object.defineProperty(e,"__esModule",{value:!0});var o=a(3);e.default={data:function(){return{title:"",artList:[],inputContent:"",needUploadImg:[],uploadIndex:0,caties:["点击选择"],currentCateIndex:0,catiesFromApi:[],sedCateIndex:0}},onLoad:function(e){var a=this;if(n=this,i=e.artId,o.sign(this.apiServer),!(s=this.checkLogin("../my/my","2")))return!1;t.request({url:this.apiServer+"art&m=info&artid="+i,method:"GET",data:{},success:function(e){var i=e.data.data,s=i.art_content;s=JSON.parse(s),n.artList=s,a.title=i.art_title,t.request({url:n.apiServer+"category&m=index",method:"GET",success:function(t){var e=t.data.data;for(var a in e)n.caties.push(e[a]);n.catiesFromApi=e,n.sedCateIndex=i.art_cate;for(var s=e[i.art_cate],o=0;o<n.caties.length;o++)if(s==n.caties[o]){n.currentCateIndex=o;break}}})}})},methods:{submitNow:function(){if(this.title.length<2)t.showToast({title:"请输入标题",icon:"none"});else if(this.artList.length<1)t.showToast({title:"请填写文章内容",icon:"none"});else if(this.sedCateIndex<1)t.showToast({title:"请选择分类",icon:"none"});else{this.needUploadImg=[];for(var e=0;e<this.artList.length;e++)"image"==this.artList[e].type&&-1==this.artList[e].content.indexOf("www.orianna.top")&&this.needUploadImg.push({tmpurl:this.artList[e].content,indexID:e});this.uploadImg()}},uploadImg:function(){if(this.needUploadImg.length<1||this.uploadIndex>=this.needUploadImg.length){t.showLoading({title:"正在提交"});var e=t.getStorageSync("sign");t.request({url:this.apiServer+"art&m=edit&artid="+i,method:"POST",header:{"content-type":"application/x-www-form-urlencoded"},data:{title:n.title,content:JSON.stringify(n.artList),uid:s[0],random:s[1],cate:n.sedCateIndex,sign:e},success:function(e){"ok"==e.data.status?(t.showToast({title:"提交成功",icon:"none"}),setTimeout(function(){t.switchTab({url:"../my/my"})},1e3)):t.showToast({title:e.data.data,icon:"none"})}})}else{t.showLoading({title:"上传图片"});t.uploadFile({url:n.apiServer+"uploadimg",filePath:n.needUploadImg[n.uploadIndex].tmpurl,name:"file",success:function(e){if("ok"!=(e=JSON.parse(e.data)).status)return console.log(e),t.showToast({title:"上传图片失败,请重试!",icon:"none"}),!1;var a=n.needUploadImg[n.uploadIndex].indexID;n.artList[a].content=n.staticServer+e.data,console.log(n.artList),n.uploadIndex++,setTimeout(function(){n.uploadImg()},1e3)},fail:function(){t.showToast({title:"上传图片失败,请重试!",icon:"none"})}})}},cateChange:function(t){var e=t.detail.value;if(this.currentCateIndex=e,!(e<1)){for(var a=this.caties[e],i=0;i<this.catiesFromApi.length;i++)if(a==this.catiesFromApi[i].cate_name){this.sedCateIndex=this.catiesFromApi[i].cate_id;break}this.currentCateIndex=e,console.log(this.sedCateIndex)}},removeImg:function(e){var a=e.currentTarget.dataset.index;t.showModal({content:"确定要删除此图片吗",title:"提示",success:function(t){t.confirm&&n.artList.splice(a,1)}})},deleteText:function(e){var a=e.currentTarget.dataset.index;t.showModal({content:"确定要删除吗",title:"提示",success:function(t){t.confirm&&n.artList.splice(a,1)}})},submit:function(e){var a=e.detail.value.artText;a.length<1?t.showToast({title:"请输入内容",icon:"none"}):(this.artList.push({type:"text",content:a}),this.inputContent="")},addImg:function(){t.chooseImage({count:1,sizeType:["compressed"],success:function(t){n.artList.push({type:"image",content:t.tempFilePaths[0]})}})}}}}).call(e,a(0).default)},40:function(t,e,a){"use strict";var i=function(){var t=this,e=t.$createElement,a=t._self._c||e;return a("view",{staticClass:"wrap"},[a("view",{staticClass:"write_title"},[a("input",{directives:[{name:"model",rawName:"v-model",value:t.title,expression:"title"}],attrs:{type:"text",placeholder:"请输入标题",eventid:"GAS-0"},domProps:{value:t.title},on:{input:function(e){e.target.composing||(t.title=e.target.value)}}})]),a("view",{staticClass:"artList"},t._l(t.artList,function(e,i){return a("block",{key:i},["image"==e.type?a("view",{staticClass:"item"},[a("image",{attrs:{src:e.content,"data-index":i,mode:"widthFix",eventid:"nA6-1-"+i},on:{tap:t.removeImg}})]):t._e(),"text"==e.type?a("view",{staticClass:"item"},[a("textarea",{directives:[{name:"model",rawName:"v-model",value:t.artList[i].content,expression:"artList[index].content"}],attrs:{value:e.content,placeholder:"",eventid:"jq9-2-"+i},domProps:{value:t.artList[i].content},on:{input:function(e){e.target.composing||(t.artList[i].content=e.target.value)}}}),a("view",{staticClass:"deleteText",attrs:{"data-index":i,eventid:"c00-3-"+i},on:{tap:t.deleteText}},[t._v("删除")])]):t._e()])})),a("form",{attrs:{eventid:"36B-6"},on:{submit:t.submit}},[a("view",{staticClass:"inputArea"},[a("view",{staticClass:"addImg",attrs:{eventid:"LSZ-4"},on:{tap:t.addImg}},[t._v("+图片")]),a("view",{staticClass:"addText"},[a("textarea",{directives:[{name:"model",rawName:"v-model",value:t.inputContent,expression:"inputContent"}],attrs:{name:"artText",maxlength:"-1",placeholder:"请输入文本",eventid:"LBZ-5"},domProps:{value:t.inputContent},on:{input:function(e){e.target.composing||(t.inputContent=e.target.value)}}}),a("button",{attrs:{type:"primary","form-type":"submit"}},[t._v("添加")])],1)])]),a("view",{staticClass:"art-cate"},[a("view",[t._v("文章分类")]),a("view",{},[a("picker",{attrs:{mode:"selector",range:t.caties,eventid:"NBm-7"},on:{change:t.cateChange}},[a("view",[t._v(t._s(t.caties[t.currentCateIndex]))])])],1)]),t.artList.length>0?a("view",{staticClass:"submitNow",attrs:{eventid:"A8k-8"},on:{tap:t.submitNow}},[t._v("编辑")]):t._e()],1)};i._withStripped=!0;var n={render:i,staticRenderFns:[]};e.a=n}},[36]);
+(global["webpackJsonp"] = global["webpackJsonp"] || []).push([["pages/editArt/editArt"],{
+
+/***/ "../../../../A/my/readbook/client/main.js?{\"page\":\"pages%2FeditArt%2FeditArt\"}":
+/*!****************************************************************************!*\
+  !*** E:/A/my/readbook/client/main.js?{"page":"pages%2FeditArt%2FeditArt"} ***!
+  \****************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+__webpack_require__(/*! uni-pages */ "../../../../A/my/readbook/client/pages.json");
+var _mpvuePageFactory = _interopRequireDefault(__webpack_require__(/*! mpvue-page-factory */ "./node_modules/@dcloudio/vue-cli-plugin-uni/packages/mpvue-page-factory/index.js"));
+var _editArt = _interopRequireDefault(__webpack_require__(/*! ./pages/editArt/editArt.vue */ "../../../../A/my/readbook/client/pages/editArt/editArt.vue"));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}
+Page((0, _mpvuePageFactory.default)(_editArt.default));
+
+/***/ }),
+
+/***/ "../../../../A/my/readbook/client/pages/editArt/editArt.vue":
+/*!*********************************************************!*\
+  !*** E:/A/my/readbook/client/pages/editArt/editArt.vue ***!
+  \*********************************************************/
+/*! no static exports found */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _editArt_vue_vue_type_template_id_9fdd7946___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./editArt.vue?vue&type=template&id=9fdd7946& */ "../../../../A/my/readbook/client/pages/editArt/editArt.vue?vue&type=template&id=9fdd7946&");
+/* harmony import */ var _editArt_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./editArt.vue?vue&type=script&lang=js& */ "../../../../A/my/readbook/client/pages/editArt/editArt.vue?vue&type=script&lang=js&");
+/* harmony reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in _editArt_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__) if(__WEBPACK_IMPORT_KEY__ !== 'default') (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return _editArt_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__[key]; }) }(__WEBPACK_IMPORT_KEY__));
+/* harmony import */ var _ChromeDownLoad_HBuilderX_plugins_uniapp_cli_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../../../ChromeDownLoad/HBuilderX/plugins/uniapp-cli/node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+/* normalize component */
+
+var component = Object(_ChromeDownLoad_HBuilderX_plugins_uniapp_cli_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
+  _editArt_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _editArt_vue_vue_type_template_id_9fdd7946___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _editArt_vue_vue_type_template_id_9fdd7946___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  false,
+  null,
+  null,
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "A/my/readbook/client/pages/editArt/editArt.vue"
+/* harmony default export */ __webpack_exports__["default"] = (component.exports);
+
+/***/ }),
+
+/***/ "../../../../A/my/readbook/client/pages/editArt/editArt.vue?vue&type=script&lang=js&":
+/*!**********************************************************************************!*\
+  !*** E:/A/my/readbook/client/pages/editArt/editArt.vue?vue&type=script&lang=js& ***!
+  \**********************************************************************************/
+/*! no static exports found */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _ChromeDownLoad_HBuilderX_plugins_uniapp_cli_node_modules_babel_loader_lib_index_js_ChromeDownLoad_HBuilderX_plugins_uniapp_cli_node_modules_dcloudio_vue_cli_plugin_uni_packages_webpack_preprocess_loader_index_js_ref_12_1_ChromeDownLoad_HBuilderX_plugins_uniapp_cli_node_modules_dcloudio_vue_cli_plugin_uni_packages_webpack_preprocess_loader_index_js_ref_18_0_ChromeDownLoad_HBuilderX_plugins_uniapp_cli_node_modules_dcloudio_webpack_uni_mp_loader_lib_script_js_ChromeDownLoad_HBuilderX_plugins_uniapp_cli_node_modules_vue_loader_lib_index_js_vue_loader_options_ChromeDownLoad_HBuilderX_plugins_uniapp_cli_node_modules_dcloudio_webpack_uni_mp_loader_lib_style_js_editArt_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../../ChromeDownLoad/HBuilderX/plugins/uniapp-cli/node_modules/babel-loader/lib!../../../../../../ChromeDownLoad/HBuilderX/plugins/uniapp-cli/node_modules/@dcloudio/vue-cli-plugin-uni/packages/webpack-preprocess-loader??ref--12-1!../../../../../../ChromeDownLoad/HBuilderX/plugins/uniapp-cli/node_modules/@dcloudio/vue-cli-plugin-uni/packages/webpack-preprocess-loader??ref--18-0!../../../../../../ChromeDownLoad/HBuilderX/plugins/uniapp-cli/node_modules/@dcloudio/webpack-uni-mp-loader/lib/script.js!../../../../../../ChromeDownLoad/HBuilderX/plugins/uniapp-cli/node_modules/vue-loader/lib??vue-loader-options!../../../../../../ChromeDownLoad/HBuilderX/plugins/uniapp-cli/node_modules/@dcloudio/webpack-uni-mp-loader/lib/style.js!./editArt.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js!./node_modules/@dcloudio/vue-cli-plugin-uni/packages/webpack-preprocess-loader/index.js?!./node_modules/@dcloudio/vue-cli-plugin-uni/packages/webpack-preprocess-loader/index.js?!./node_modules/@dcloudio/webpack-uni-mp-loader/lib/script.js!./node_modules/vue-loader/lib/index.js?!./node_modules/@dcloudio/webpack-uni-mp-loader/lib/style.js!../../../../A/my/readbook/client/pages/editArt/editArt.vue?vue&type=script&lang=js&");
+/* harmony import */ var _ChromeDownLoad_HBuilderX_plugins_uniapp_cli_node_modules_babel_loader_lib_index_js_ChromeDownLoad_HBuilderX_plugins_uniapp_cli_node_modules_dcloudio_vue_cli_plugin_uni_packages_webpack_preprocess_loader_index_js_ref_12_1_ChromeDownLoad_HBuilderX_plugins_uniapp_cli_node_modules_dcloudio_vue_cli_plugin_uni_packages_webpack_preprocess_loader_index_js_ref_18_0_ChromeDownLoad_HBuilderX_plugins_uniapp_cli_node_modules_dcloudio_webpack_uni_mp_loader_lib_script_js_ChromeDownLoad_HBuilderX_plugins_uniapp_cli_node_modules_vue_loader_lib_index_js_vue_loader_options_ChromeDownLoad_HBuilderX_plugins_uniapp_cli_node_modules_dcloudio_webpack_uni_mp_loader_lib_style_js_editArt_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_ChromeDownLoad_HBuilderX_plugins_uniapp_cli_node_modules_babel_loader_lib_index_js_ChromeDownLoad_HBuilderX_plugins_uniapp_cli_node_modules_dcloudio_vue_cli_plugin_uni_packages_webpack_preprocess_loader_index_js_ref_12_1_ChromeDownLoad_HBuilderX_plugins_uniapp_cli_node_modules_dcloudio_vue_cli_plugin_uni_packages_webpack_preprocess_loader_index_js_ref_18_0_ChromeDownLoad_HBuilderX_plugins_uniapp_cli_node_modules_dcloudio_webpack_uni_mp_loader_lib_script_js_ChromeDownLoad_HBuilderX_plugins_uniapp_cli_node_modules_vue_loader_lib_index_js_vue_loader_options_ChromeDownLoad_HBuilderX_plugins_uniapp_cli_node_modules_dcloudio_webpack_uni_mp_loader_lib_style_js_editArt_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__);
+/* harmony reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in _ChromeDownLoad_HBuilderX_plugins_uniapp_cli_node_modules_babel_loader_lib_index_js_ChromeDownLoad_HBuilderX_plugins_uniapp_cli_node_modules_dcloudio_vue_cli_plugin_uni_packages_webpack_preprocess_loader_index_js_ref_12_1_ChromeDownLoad_HBuilderX_plugins_uniapp_cli_node_modules_dcloudio_vue_cli_plugin_uni_packages_webpack_preprocess_loader_index_js_ref_18_0_ChromeDownLoad_HBuilderX_plugins_uniapp_cli_node_modules_dcloudio_webpack_uni_mp_loader_lib_script_js_ChromeDownLoad_HBuilderX_plugins_uniapp_cli_node_modules_vue_loader_lib_index_js_vue_loader_options_ChromeDownLoad_HBuilderX_plugins_uniapp_cli_node_modules_dcloudio_webpack_uni_mp_loader_lib_style_js_editArt_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__) if(__WEBPACK_IMPORT_KEY__ !== 'default') (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return _ChromeDownLoad_HBuilderX_plugins_uniapp_cli_node_modules_babel_loader_lib_index_js_ChromeDownLoad_HBuilderX_plugins_uniapp_cli_node_modules_dcloudio_vue_cli_plugin_uni_packages_webpack_preprocess_loader_index_js_ref_12_1_ChromeDownLoad_HBuilderX_plugins_uniapp_cli_node_modules_dcloudio_vue_cli_plugin_uni_packages_webpack_preprocess_loader_index_js_ref_18_0_ChromeDownLoad_HBuilderX_plugins_uniapp_cli_node_modules_dcloudio_webpack_uni_mp_loader_lib_script_js_ChromeDownLoad_HBuilderX_plugins_uniapp_cli_node_modules_vue_loader_lib_index_js_vue_loader_options_ChromeDownLoad_HBuilderX_plugins_uniapp_cli_node_modules_dcloudio_webpack_uni_mp_loader_lib_style_js_editArt_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__[key]; }) }(__WEBPACK_IMPORT_KEY__));
+ /* harmony default export */ __webpack_exports__["default"] = (_ChromeDownLoad_HBuilderX_plugins_uniapp_cli_node_modules_babel_loader_lib_index_js_ChromeDownLoad_HBuilderX_plugins_uniapp_cli_node_modules_dcloudio_vue_cli_plugin_uni_packages_webpack_preprocess_loader_index_js_ref_12_1_ChromeDownLoad_HBuilderX_plugins_uniapp_cli_node_modules_dcloudio_vue_cli_plugin_uni_packages_webpack_preprocess_loader_index_js_ref_18_0_ChromeDownLoad_HBuilderX_plugins_uniapp_cli_node_modules_dcloudio_webpack_uni_mp_loader_lib_script_js_ChromeDownLoad_HBuilderX_plugins_uniapp_cli_node_modules_vue_loader_lib_index_js_vue_loader_options_ChromeDownLoad_HBuilderX_plugins_uniapp_cli_node_modules_dcloudio_webpack_uni_mp_loader_lib_style_js_editArt_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0___default.a); 
+
+/***/ }),
+
+/***/ "../../../../A/my/readbook/client/pages/editArt/editArt.vue?vue&type=template&id=9fdd7946&":
+/*!****************************************************************************************!*\
+  !*** E:/A/my/readbook/client/pages/editArt/editArt.vue?vue&type=template&id=9fdd7946& ***!
+  \****************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _ChromeDownLoad_HBuilderX_plugins_uniapp_cli_node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_ChromeDownLoad_HBuilderX_plugins_uniapp_cli_node_modules_dcloudio_vue_cli_plugin_uni_packages_webpack_preprocess_loader_index_js_ref_17_0_ChromeDownLoad_HBuilderX_plugins_uniapp_cli_node_modules_dcloudio_webpack_uni_mp_loader_lib_template_js_ChromeDownLoad_HBuilderX_plugins_uniapp_cli_node_modules_vue_loader_lib_index_js_vue_loader_options_ChromeDownLoad_HBuilderX_plugins_uniapp_cli_node_modules_dcloudio_webpack_uni_mp_loader_lib_style_js_editArt_vue_vue_type_template_id_9fdd7946___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../../ChromeDownLoad/HBuilderX/plugins/uniapp-cli/node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../../../ChromeDownLoad/HBuilderX/plugins/uniapp-cli/node_modules/@dcloudio/vue-cli-plugin-uni/packages/webpack-preprocess-loader??ref--17-0!../../../../../../ChromeDownLoad/HBuilderX/plugins/uniapp-cli/node_modules/@dcloudio/webpack-uni-mp-loader/lib/template.js!../../../../../../ChromeDownLoad/HBuilderX/plugins/uniapp-cli/node_modules/vue-loader/lib??vue-loader-options!../../../../../../ChromeDownLoad/HBuilderX/plugins/uniapp-cli/node_modules/@dcloudio/webpack-uni-mp-loader/lib/style.js!./editArt.vue?vue&type=template&id=9fdd7946& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/@dcloudio/vue-cli-plugin-uni/packages/webpack-preprocess-loader/index.js?!./node_modules/@dcloudio/webpack-uni-mp-loader/lib/template.js!./node_modules/vue-loader/lib/index.js?!./node_modules/@dcloudio/webpack-uni-mp-loader/lib/style.js!../../../../A/my/readbook/client/pages/editArt/editArt.vue?vue&type=template&id=9fdd7946&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _ChromeDownLoad_HBuilderX_plugins_uniapp_cli_node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_ChromeDownLoad_HBuilderX_plugins_uniapp_cli_node_modules_dcloudio_vue_cli_plugin_uni_packages_webpack_preprocess_loader_index_js_ref_17_0_ChromeDownLoad_HBuilderX_plugins_uniapp_cli_node_modules_dcloudio_webpack_uni_mp_loader_lib_template_js_ChromeDownLoad_HBuilderX_plugins_uniapp_cli_node_modules_vue_loader_lib_index_js_vue_loader_options_ChromeDownLoad_HBuilderX_plugins_uniapp_cli_node_modules_dcloudio_webpack_uni_mp_loader_lib_style_js_editArt_vue_vue_type_template_id_9fdd7946___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _ChromeDownLoad_HBuilderX_plugins_uniapp_cli_node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_ChromeDownLoad_HBuilderX_plugins_uniapp_cli_node_modules_dcloudio_vue_cli_plugin_uni_packages_webpack_preprocess_loader_index_js_ref_17_0_ChromeDownLoad_HBuilderX_plugins_uniapp_cli_node_modules_dcloudio_webpack_uni_mp_loader_lib_template_js_ChromeDownLoad_HBuilderX_plugins_uniapp_cli_node_modules_vue_loader_lib_index_js_vue_loader_options_ChromeDownLoad_HBuilderX_plugins_uniapp_cli_node_modules_dcloudio_webpack_uni_mp_loader_lib_style_js_editArt_vue_vue_type_template_id_9fdd7946___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+
+
+
+/***/ }),
+
+/***/ "./node_modules/babel-loader/lib/index.js!./node_modules/@dcloudio/vue-cli-plugin-uni/packages/webpack-preprocess-loader/index.js?!./node_modules/@dcloudio/vue-cli-plugin-uni/packages/webpack-preprocess-loader/index.js?!./node_modules/@dcloudio/webpack-uni-mp-loader/lib/script.js!./node_modules/vue-loader/lib/index.js?!./node_modules/@dcloudio/webpack-uni-mp-loader/lib/style.js!../../../../A/my/readbook/client/pages/editArt/editArt.vue?vue&type=script&lang=js&":
+/*!*********************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib!./node_modules/@dcloudio/vue-cli-plugin-uni/packages/webpack-preprocess-loader??ref--12-1!./node_modules/@dcloudio/vue-cli-plugin-uni/packages/webpack-preprocess-loader??ref--18-0!./node_modules/@dcloudio/webpack-uni-mp-loader/lib/script.js!./node_modules/vue-loader/lib??vue-loader-options!./node_modules/@dcloudio/webpack-uni-mp-loader/lib/style.js!E:/A/my/readbook/client/pages/editArt/editArt.vue?vue&type=script&lang=js& ***!
+  \*********************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+/* WEBPACK VAR INJECTION */(function(uni) {Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+var artId, _self, loginRes;
+var signModel = __webpack_require__(/*! ../../commons/sign.js */ "../../../../A/my/readbook/client/commons/sign.js");var _default =
+{
+  data: function data() {
+    return {
+      title: '',
+      artList: [],
+      inputContent: "",
+      needUploadImg: [],
+      uploadIndex: 0,
+      //分类
+      caties: ['点击选择'],
+      currentCateIndex: 0,
+      catiesFromApi: [],
+      // 记录真实选择的api接口数据的分类id
+      sedCateIndex: 0 };
+
+  },
+  onLoad: function onLoad(option) {var _this = this;
+    _self = this;
+    artId = option.artId;
+    signModel.sign(this.apiServer);
+    loginRes = this.checkLogin('../my/my', '2');
+    if (!loginRes) {return false;}
+    // 加载要编辑的文章
+    uni.request({
+      url: this.apiServer + 'art&m=info&artid=' + artId,
+      method: 'GET',
+      data: {},
+      success: function success(res) {
+        var art = res.data.data;
+        // 文章内容转换并展示
+        var artContent = art.art_content;
+        artContent = JSON.parse(artContent);
+        _self.artList = artContent;
+        // 默认值赋值
+        _this.title = art.art_title;
+        // 加载文章分类并设置默认值
+        uni.request({
+          url: _self.apiServer + 'category&m=index',
+          method: 'GET',
+          success: function success(res) {
+            var categories = res.data.data;
+            for (var k in categories) {
+              _self.caties.push(categories[k]);
+            }
+            // 记录分类信息
+            _self.catiesFromApi = categories;
+            // 获取当前分类的默认值
+            _self.sedCateIndex = art.art_cate;
+            // 对应的查找picker的默认值
+            var cateName = categories[art.art_cate];
+            for (var i = 0; i < _self.caties.length; i++) {
+              if (cateName == _self.caties[i]) {
+                _self.currentCateIndex = i;
+                break;
+              }
+            }
+          } });
+
+      } });
+
+  },
+  methods: {
+    submitNow: function submitNow() {
+      // 数据验证
+      if (this.title.length < 2) {uni.showToast({ title: '请输入标题', icon: "none" });return;}
+      if (this.artList.length < 1) {uni.showToast({ title: '请填写文章内容', icon: "none" });return;}
+      if (this.sedCateIndex < 1) {uni.showToast({ title: '请选择分类', icon: "none" });return;}
+      // 上传图片 一次一个多次上传 [ 递归函数 ]
+      // 上传完成后整体提交数据
+      // 首先整理一下需要上传的图片
+      // this.needUploadImg = [{tmpurl : 临时地址, index : 数据索引}]
+      this.needUploadImg = [];
+      for (var i = 0; i < this.artList.length; i++) {
+        if (this.artList[i].type == 'image') {
+          if (this.artList[i].content.indexOf('www.orianna.top') == -1) {
+            this.needUploadImg.push({ "tmpurl": this.artList[i].content, "indexID": i });
+          }
+        }
+      }
+      this.uploadImg();
+    },
+    uploadImg: function uploadImg() {
+      // 如果没有图片 或者已经上传完成 则执行提交
+      if (this.needUploadImg.length < 1 || this.uploadIndex >= this.needUploadImg.length) {
+        uni.showLoading({ title: "正在提交" });
+        // 将信息整合后提交到服务器
+        var sign = uni.getStorageSync('sign');
+        uni.request({
+          url: this.apiServer + 'art&m=edit&artid=' + artId,
+          method: 'POST',
+          header: { 'content-type': "application/x-www-form-urlencoded" },
+          data: {
+            title: _self.title,
+            content: JSON.stringify(_self.artList),
+            uid: loginRes[0],
+            random: loginRes[1],
+            cate: _self.sedCateIndex,
+            sign: sign },
+
+          success: function success(res) {
+            if (res.data.status == 'ok') {
+              uni.showToast({ title: "提交成功", icon: "none" });
+              setTimeout(function () {
+                uni.switchTab({
+                  url: '../my/my' });
+
+              }, 1000);
+            } else {
+              uni.showToast({ title: res.data.data, icon: "none" });
+            }
+          } });
+
+        return;
+      }
+      // 上传图片
+      uni.showLoading({ title: "上传图片" });
+      var uploader = uni.uploadFile({
+        url: _self.apiServer + 'uploadimg',
+        filePath: _self.needUploadImg[_self.uploadIndex].tmpurl,
+        name: 'file',
+        success: function success(uploadFileRes) {
+          uploadFileRes = JSON.parse(uploadFileRes.data);
+          if (uploadFileRes.status != 'ok') {
+            console.log(uploadFileRes);
+            uni.showToast({ title: "上传图片失败,请重试!", icon: "none" });
+            return false;
+          }
+          // 将已经上传的文件地址赋值给文章数据
+          var index = _self.needUploadImg[_self.uploadIndex].indexID;
+          _self.artList[index].content = _self.staticServer + uploadFileRes.data;
+          console.log(_self.artList);
+          _self.uploadIndex++;
+          // 递归上传
+          setTimeout(function () {_self.uploadImg();}, 1000);
+        },
+        fail: function fail() {
+          uni.showToast({ title: "上传图片失败,请重试!", icon: "none" });
+        } });
+
+    },
+    cateChange: function cateChange(e) {
+      var sedIndex = e.detail.value;
+      this.currentCateIndex = sedIndex;
+      // 获取选择的分类名称
+      if (sedIndex < 1) {return;}
+      var cateName = this.caties[sedIndex];
+      for (var i = 0; i < this.catiesFromApi.length; i++) {
+        if (cateName == this.catiesFromApi[i].cate_name) {
+          this.sedCateIndex = this.catiesFromApi[i].cate_id;
+          break;
+        }
+      }
+      this.currentCateIndex = sedIndex;
+      console.log(this.sedCateIndex);
+    },
+    removeImg: function removeImg(e) {
+      var index = e.currentTarget.dataset.index;
+      uni.showModal({
+        content: "确定要删除此图片吗",
+        title: '提示',
+        success: function success(e) {
+          if (e.confirm) {
+            _self.artList.splice(index, 1);
+          }
+        } });
+
+    },
+    deleteText: function deleteText(e) {
+      var index = e.currentTarget.dataset.index;
+      uni.showModal({
+        content: "确定要删除吗",
+        title: '提示',
+        success: function success(e) {
+          if (e.confirm) {
+            _self.artList.splice(index, 1);
+          }
+        } });
+
+    },
+    submit: function submit(res) {
+      var content = res.detail.value.artText;
+      if (content.length < 1) {uni.showToast({ title: "请输入内容", icon: 'none' });return;}
+      this.artList.push({ "type": "text", "content": content });
+      this.inputContent = '';
+    },
+    addImg: function addImg() {
+      uni.chooseImage({
+        count: 1,
+        sizeType: ['compressed'],
+        success: function success(res) {
+          _self.artList.push({ "type": "image", "content": res.tempFilePaths[0] });
+        } });
+
+    } } };exports.default = _default;
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ "./node_modules/@dcloudio/uni-mp-weixin/dist/index.js")["default"]))
+
+/***/ }),
+
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/@dcloudio/vue-cli-plugin-uni/packages/webpack-preprocess-loader/index.js?!./node_modules/@dcloudio/webpack-uni-mp-loader/lib/template.js!./node_modules/vue-loader/lib/index.js?!./node_modules/@dcloudio/webpack-uni-mp-loader/lib/style.js!../../../../A/my/readbook/client/pages/editArt/editArt.vue?vue&type=template&id=9fdd7946&":
+/*!*******************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/@dcloudio/vue-cli-plugin-uni/packages/webpack-preprocess-loader??ref--17-0!./node_modules/@dcloudio/webpack-uni-mp-loader/lib/template.js!./node_modules/vue-loader/lib??vue-loader-options!./node_modules/@dcloudio/webpack-uni-mp-loader/lib/style.js!E:/A/my/readbook/client/pages/editArt/editArt.vue?vue&type=template&id=9fdd7946& ***!
+  \*******************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c(
+    "view",
+    { staticClass: "wrap" },
+    [
+      _c("view", { staticClass: "write_title" }, [
+        _c("input", {
+          directives: [
+            {
+              name: "model",
+              rawName: "v-model",
+              value: _vm.title,
+              expression: "title"
+            }
+          ],
+          attrs: {
+            type: "text",
+            placeholder: "请输入标题",
+            eventid: "c4c57506-0"
+          },
+          domProps: { value: _vm.title },
+          on: {
+            input: function($event) {
+              if ($event.target.composing) {
+                return
+              }
+              _vm.title = $event.target.value
+            }
+          }
+        })
+      ]),
+      _c(
+        "view",
+        { staticClass: "artList" },
+        _vm._l(_vm.artList, function(item, index) {
+          return _c("block", { key: index }, [
+            item.type == "image"
+              ? _c("view", { staticClass: "item" }, [
+                  _c("image", {
+                    attrs: {
+                      src: item.content,
+                      "data-index": index,
+                      mode: "widthFix",
+                      eventid: "c4c57506-1-" + index
+                    },
+                    on: { tap: _vm.removeImg }
+                  })
+                ])
+              : _vm._e(),
+            item.type == "text"
+              ? _c("view", { staticClass: "item" }, [
+                  _c("textarea", {
+                    directives: [
+                      {
+                        name: "model",
+                        rawName: "v-model",
+                        value: _vm.artList[index].content,
+                        expression: "artList[index].content"
+                      }
+                    ],
+                    attrs: {
+                      value: item.content,
+                      placeholder: "",
+                      eventid: "c4c57506-2-" + index
+                    },
+                    domProps: { value: _vm.artList[index].content },
+                    on: {
+                      input: function($event) {
+                        if ($event.target.composing) {
+                          return
+                        }
+                        _vm.artList[index].content = $event.target.value
+                      }
+                    }
+                  }),
+                  _c(
+                    "view",
+                    {
+                      staticClass: "deleteText",
+                      attrs: {
+                        "data-index": index,
+                        eventid: "c4c57506-3-" + index
+                      },
+                      on: { tap: _vm.deleteText }
+                    },
+                    [_vm._v("删除")]
+                  )
+                ])
+              : _vm._e()
+          ])
+        })
+      ),
+      _c(
+        "form",
+        { attrs: { eventid: "c4c57506-6" }, on: { submit: _vm.submit } },
+        [
+          _c("view", { staticClass: "inputArea" }, [
+            _c(
+              "view",
+              {
+                staticClass: "addImg",
+                attrs: { eventid: "c4c57506-4" },
+                on: { tap: _vm.addImg }
+              },
+              [_vm._v("+图片")]
+            ),
+            _c(
+              "view",
+              { staticClass: "addText" },
+              [
+                _c("textarea", {
+                  directives: [
+                    {
+                      name: "model",
+                      rawName: "v-model",
+                      value: _vm.inputContent,
+                      expression: "inputContent"
+                    }
+                  ],
+                  attrs: {
+                    name: "artText",
+                    maxlength: "-1",
+                    placeholder: "请输入文本",
+                    eventid: "c4c57506-5"
+                  },
+                  domProps: { value: _vm.inputContent },
+                  on: {
+                    input: function($event) {
+                      if ($event.target.composing) {
+                        return
+                      }
+                      _vm.inputContent = $event.target.value
+                    }
+                  }
+                }),
+                _c(
+                  "button",
+                  { attrs: { type: "primary", "form-type": "submit" } },
+                  [_vm._v("添加")]
+                )
+              ],
+              1
+            )
+          ])
+        ]
+      ),
+      _c("view", { staticClass: "art-cate" }, [
+        _c("view", [_vm._v("文章分类")]),
+        _c(
+          "view",
+          {},
+          [
+            _c(
+              "picker",
+              {
+                attrs: {
+                  mode: "selector",
+                  range: _vm.caties,
+                  eventid: "c4c57506-7"
+                },
+                on: { change: _vm.cateChange }
+              },
+              [_c("view", [_vm._v(_vm._s(_vm.caties[_vm.currentCateIndex]))])]
+            )
+          ],
+          1
+        )
+      ]),
+      _vm.artList.length > 0
+        ? _c(
+            "view",
+            {
+              staticClass: "submitNow",
+              attrs: { eventid: "c4c57506-8" },
+              on: { tap: _vm.submitNow }
+            },
+            [_vm._v("编辑")]
+          )
+        : _vm._e()
+    ],
+    1
+  )
+}
+var staticRenderFns = []
+render._withStripped = true
+
+
+
+/***/ })
+
+},[["../../../../A/my/readbook/client/main.js?{\"page\":\"pages%2FeditArt%2FeditArt\"}","common/runtime","common/vendor"]]]);
 //# sourceMappingURL=../../../.sourcemap/mp-weixin/pages/editArt/editArt.js.map
