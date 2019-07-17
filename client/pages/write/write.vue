@@ -1,5 +1,5 @@
 <template>
-	<view class="wrap" v-if="version == '1'">
+	<view :class="['wrap', graceSkeleton == 'ing' ? 'noshow' : '']" v-if="version == '1'">
 		<view  class="write_title">
 			<input type="text" v-model="title"  placeholder="请输入标题"/>
 		</view>
@@ -66,13 +66,15 @@ export default {
 			currentCateIndex:0,
 			catiesFromApi:[],
 			// 记录真实选择的api接口数据的分类id
-			sedCateIndex  : 0
+			sedCateIndex  : 0,
+			graceSkeleton : 'ing'
 		}
 	},
 	onLoad : function() {
 		setTimeout(() => {
 			this.arr = [0, 9, 8, 7, 6, 5, 4, 3, 2, 1];
 		}, 2000);
+		
 		_self = this;		
 		loginRes = this.checkLogin('../write/write', '2');
 		if(!loginRes){return false;}
@@ -96,12 +98,14 @@ export default {
 		});
 	},
 	onShow:function(){
+		_self = this;
 		uni.request({
 		    url: this.apiServer + 'index&m=index',
 		    method: 'GET',
 		    data: {},
 		    success: res => {
 				this.version = res.data.data.version;
+				this.graceSkeleton = res.data.version;
 				if(res.data.data.version == '0'){
 					// uni.hideTabBar();
 					
@@ -272,5 +276,7 @@ export default {
 </script>
 
 <style>
-
+.noshow{
+	display: none;
+}
 </style>
